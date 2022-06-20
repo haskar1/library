@@ -1,0 +1,75 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: min-content auto;
+    padding: 1rem;
+    gap: 3rem;
+}
+
+.new-book-btn {
+    width: max-content;
+    padding: 1em 2em;
+    place-self: center;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(10rem, 100%), 1fr));
+    gap: 3rem;
+}
+
+.cards-container > div {
+    display: grid;
+    grid-template-columns: min-content minmax(max-content, auto) min-content;
+    align-items: center;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
+    padding: 1rem;
+    background-color: cyan;
+}
+
+.cards-container > div > :first-child {
+    grid-column: 1 / 3;
+}
+
+
+.cards-container > div > :nth-child(3),
+.cards-container > div > :nth-child(4) {
+    grid-column: 1 / 4;
+}
+
+.cards-container > div > img {
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+}
+
+.modal.active {
+    display: grid;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 1rem;
+}
+
+.modal.active form {
+    display: grid;
+    gap: 1rem;
+}
+
+.modal.active img {
+    cursor: pointer;
+    justify-self: end;
+}
