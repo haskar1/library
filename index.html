@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script src="script.js" type="text/javascript" defer></script>
 </head>
 <body>
@@ -15,16 +18,17 @@
         <div class="modal">
             <img src="xmark.png" alt="Red X">
             <form action="">
-                <input type="text" id="title" name="title" placeholder="Title">
-                <input type="text" id="author" name="author" placeholder="Author">
-                <input type="number" id="pages" name="pages" placeholder="Pages" min="0">
+                <input type="text" id="title" name="title" placeholder="Title" required>
+                <input type="text" id="author" name="author" placeholder="Author" required>
+                <input type="number" id="pages" name="pages" placeholder="Pages" min="0" required>
         
-                <label for="read">
+                <label for="read" class="switch">
                     <input type="checkbox" id="read" name="read">
-                    Finished Reading
+                    <span class="slider round"></span>
+                    <span>Finished Reading</span>
                 </label>
 
-                <button type="button" class="modal-add-btn">Add</button>
+                <button type="submit" class="modal-add-btn">Add</button>
             </form>
         </div>
     </div>
