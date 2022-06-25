@@ -71,12 +71,29 @@ html, body {
     cursor: pointer;
 }
 
+.overlay {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0.3;
+}
+
+.overlay.active {
+    display: block;
+}
+
 .modal {
     display: none;
 }
 
 .modal.active {
     display: grid;
+    z-index: 2;
     position: fixed;
     top: 50%;
     left: 50%;

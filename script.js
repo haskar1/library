@@ -57,7 +57,20 @@ createBookEntry.prototype.createCard = function () {
     read.appendChild(readLabelText);
 }
 
-createBookEntry.prototype.removeBook = function () {
+createBookEntry.prototype.changeRead = function () {
+    let addedBookReadCheckbox = document.querySelectorAll('.cards-container > div > label > input');
+    addedBookReadCheckbox = addedBookReadCheckbox[addedBookReadCheckbox.length - 1];
+    addedBookReadCheckbox.addEventListener('click', () => {
+        if (this.read === true) {
+            this.read = false;
+        }
+        else {
+            this.read = true;
+        }
+    })
+}
+
+function removeBook() {
     let cards = document.querySelectorAll('.cards-container > div');
     const removeBtn = cards[cards.length - 1].querySelector('img');
     removeBtn.addEventListener('click', (e) => {
@@ -85,40 +98,31 @@ createBookEntry.prototype.removeBook = function () {
     })
 }
 
-createBookEntry.prototype.changeRead = function () {
-    let addedBookReadCheckbox = document.querySelectorAll('.cards-container > div > label > input');
-    addedBookReadCheckbox = addedBookReadCheckbox[addedBookReadCheckbox.length - 1];
-    addedBookReadCheckbox.addEventListener('click', () => {
-        if (this.read === true) {
-            this.read = false;
-        }
-        else {
-            this.read = true;
-        }
-    })
-}
-
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new createBookEntry(title, author, pages, read);
     myLibrary.push(newBook);
     newBook.createCard();
-    newBook.removeBook();
     newBook.changeRead();
+    removeBook();
 }
 
 
 
-// New Book button and Modal
+// New Book button; Modal; Overlay
+
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
 
 const newBookBtn = document.querySelector('.new-book-btn');
-const modal = document.querySelector('.modal');
 newBookBtn.addEventListener('click', () => {
     modal.classList.add('active');
+    overlay.classList.add('active');
 })
 
 const modalExitBtn = document.querySelector('.modal > img');
 modalExitBtn.addEventListener('click', () => {
     modal.classList.remove('active');
+    overlay.classList.remove('active');
 })
 
 const modalAddBtn = document.querySelector('.modal-add-btn');
@@ -139,4 +143,10 @@ modalAddBtn.addEventListener('click', () => {
     document.getElementById('pages').value = '';
     document.getElementById('read').checked = false;
     modal.classList.remove('active');
+    overlay.classList.remove('active');
+})
+
+overlay.addEventListener('click', () => {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
 })
