@@ -1,6 +1,79 @@
 let myLibrary = [];
 
-function createBookEntry(title, author, pages, read) {
+class createBookEntry {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    createCard() {
+        const cardsContainer = document.querySelector('.cards-container');
+        const card = document.createElement('div');
+        const title = document.createElement('p');
+        const remove = document.createElement('img');
+        const author = document.createElement('p');
+        const pages = document.createElement('p');
+        const modalReadCheckbox = document.getElementById('read');
+        const read = document.createElement('label');
+        const addedBookReadCheckbox = document.createElement('input');
+        const readSlider = document.createElement('span');
+        const readLabelText = document.createElement('span');
+
+        card.setAttribute("id", myLibrary.length - 1);
+        title.textContent = '"' + this.title + '"';
+        remove.setAttribute("src", "xmark.png");
+        remove.setAttribute("alt", "red X");
+        author.textContent = "By: " + this.author;
+        read.setAttribute("for", `added-book-read-${myLibrary.length - 1}`);
+        read.classList.add('switch');
+        addedBookReadCheckbox.setAttribute("type", "checkbox");
+        addedBookReadCheckbox.setAttribute("id", `added-book-read-${myLibrary.length - 1}`);
+        readSlider.classList.add('slider', 'round');
+        readLabelText.textContent = "Finished reading";
+
+        if (this.pages == 1) {
+            pages.textContent = this.pages + " page";
+        }
+        else {
+            pages.textContent = this.pages + " pages";
+        }
+
+        if (modalReadCheckbox.checked === true) {
+            addedBookReadCheckbox.checked = true;
+        }
+        else {
+            addedBookReadCheckbox.checked = false;
+        }
+
+        cardsContainer.appendChild(card);
+        card.appendChild(remove);
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(pages);
+        card.appendChild(read);
+        read.appendChild(addedBookReadCheckbox);
+        read.appendChild(readSlider);
+        read.appendChild(readLabelText);
+    }
+
+    changeRead() {
+        let addedBookReadCheckbox = document.querySelectorAll('.cards-container > div > label > input');
+        addedBookReadCheckbox = addedBookReadCheckbox[addedBookReadCheckbox.length - 1];
+        addedBookReadCheckbox.addEventListener('click', () => {
+            if (this.read === true) {
+                this.read = false;
+            }
+            else {
+                this.read = true;
+            }
+        })
+    }
+}
+
+
+/* function createBookEntry(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -68,7 +141,7 @@ createBookEntry.prototype.changeRead = function () {
             this.read = true;
         }
     })
-}
+} */
 
 function removeBook() {
     let cards = document.querySelectorAll('.cards-container > div');
